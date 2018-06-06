@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var flag: Boolean = false
-        const val hour = 18
-        const val min = 7
+        const val hour = 10
+        const val min = 22
         const val sec = 30
     }
 
