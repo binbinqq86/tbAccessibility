@@ -2,6 +2,7 @@ package example.tb.com.tbaccessibility
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -10,14 +11,20 @@ import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun closeSys() {
+    Handler().postDelayed({
+        Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
+    }, 10 * 1000)
+}
+
 class MainActivity : AppCompatActivity() {
     val TAG: String = MainActivity.javaClass.simpleName
     var mFlag: Boolean = false
 
     companion object {
         var flag: Boolean = false
-        const val hour = 10
-        const val min = 22
+        const val hour = 18
+        const val min = 3
         const val sec = 30
     }
 
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
         })
         tv.text = "this is a test"
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20f)
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
         flag = false
         Thread {
             run {
@@ -51,5 +58,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.start()
+        Handler().postDelayed({
+            //            Runtime.getRuntime().exec(arrayOf("su", "-c", "shutdown"))
+//            Runtime.getRuntime().exec(arrayOf("su","-c","reboot -p"))
+//            Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot"))
+        }, 3000)
     }
+
 }

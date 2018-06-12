@@ -5,6 +5,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +53,7 @@ public class CaptureService extends AccessibilityService {
                         MainActivity.Companion.setFlag(true);
                         Log.e(TAG, "=========点击我了，停止服务==========");
                         info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        MainActivityKt.closeSys();
                     }
                     recycle(info);
                     return;
