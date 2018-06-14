@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
@@ -23,9 +24,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var flag: Boolean = false
-        const val hour = 18
-        const val min = 3
-        const val sec = 30
+        const val hour = 20
+        const val min = 11
+        const val sec = 52
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var tv = findViewById<TextView>(R.id.tv)
         tv.setOnClickListener({
-            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+//            AlertDialog.Builder(this).setTitle("test").setMessage("hello world").create().show()
         })
         tv.text = "this is a test"
         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
@@ -58,6 +60,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.start()
+
+
+
+
+
+
         Handler().postDelayed({
             //            Runtime.getRuntime().exec(arrayOf("su", "-c", "shutdown"))
 //            Runtime.getRuntime().exec(arrayOf("su","-c","reboot -p"))
