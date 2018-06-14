@@ -32,11 +32,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var tv = findViewById<TextView>(R.id.tv)
-        tv.setOnClickListener({
+        tv.setOnClickListener{
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
             //dialog显示隐藏也会触发，输入字符也会触发
 //            AlertDialog.Builder(this).setTitle("test").setMessage("hello world").create().show()
-        })
+        }
         tv.text = "this is a test"
         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
         Thread {
