@@ -19,6 +19,7 @@ public class CaptureService extends AccessibilityService {
     private OverFloatView floatView;
     private String packageName;
     private static final String TAG = "CaptureService";
+    private boolean flag=false;
     
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -34,17 +35,17 @@ public class CaptureService extends AccessibilityService {
                 List<AccessibilityNodeInfo> list = nodeInfo.findAccessibilityNodeInfosByViewId(packageName + ":id/iv_myatte_btn_bg");
                 long time = System.currentTimeMillis();
                 String str = new SimpleDateFormat("HH:mm:ss").format(new Date(time));
-                Log.e(TAG, "currTime: " + str + "###list.size===" + list.size() + "###MainActivity.Companion.getFlag():=== " + MainActivity.Companion.getFlag());
+                Log.e(TAG, "currTime: " + str + "###list.size===" + list.size() + "###flag:=== " + flag);
                 for (AccessibilityNodeInfo info : list) {
                     int hour = Integer.parseInt(str.split(":")[0]);
                     int min = Integer.parseInt(str.split(":")[1]);
                     int sec = Integer.parseInt(str.split(":")[2]);
-                    Log.e(TAG, "MainActivity.Companion.getFlag():=== " + MainActivity.Companion.getFlag() + "###list.size===" + list.size());
+                    Log.e(TAG, "flag:=== " + flag + "###list.size===" + list.size());
                     if (hour == MainActivity.hour
-                            && min >= MainActivity.min
-                            && sec >= MainActivity.sec
-                            && !MainActivity.Companion.getFlag()) {
-                        MainActivity.Companion.setFlag(true);
+                            && min == MainActivity.min
+                            && sec == MainActivity.sec
+                            && !flag) {
+                        flag=true;
                         Log.e(TAG, "=========点击我了，停止服务==========");
                         info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                         MainActivityKt.closeSys();

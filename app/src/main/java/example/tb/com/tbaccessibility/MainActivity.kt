@@ -15,7 +15,7 @@ import java.util.*
 fun closeSys() {
     Handler().postDelayed({
         Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
-    }, 10 * 1000)
+    }, 3 * 1000)
 }
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     var mFlag: Boolean = false
 
     companion object {
-        var flag: Boolean = false
         const val hour = 20
         const val min = 11
         const val sec = 52
@@ -35,11 +34,11 @@ class MainActivity : AppCompatActivity() {
         var tv = findViewById<TextView>(R.id.tv)
         tv.setOnClickListener({
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            //dialog显示隐藏也会触发，输入字符也会触发
 //            AlertDialog.Builder(this).setTitle("test").setMessage("hello world").create().show()
         })
         tv.text = "this is a test"
         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
-        flag = false
         Thread {
             run {
                 while (!mFlag) {
@@ -50,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 //                    println("currTime:$str")
                     Log.e(TAG, "currTime: $str")
                     if (hour == MainActivity.hour
-                            && min >= MainActivity.min
-                            && sec >= MainActivity.sec
+                            && min == MainActivity.min
+                            && sec == MainActivity.sec
                             && !mFlag) {
                         mFlag = true
                         Log.e(TAG, "=========finish==========")
