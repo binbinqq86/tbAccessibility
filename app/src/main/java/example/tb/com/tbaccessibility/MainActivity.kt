@@ -15,7 +15,7 @@ import java.util.*
 fun closeSys() {
     Handler().postDelayed({
         Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
-    }, 3 * 1000)
+    }, 10 * 1000)
 }
 
 class MainActivity : AppCompatActivity() {
@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
     var mFlag: Boolean = false
 
     companion object {
-        const val hour = 20
-        const val min = 11
-        const val sec = 52
+        const val hour = 21
+        const val min = 3
+        const val sec = 26
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
