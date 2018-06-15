@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "currTime: $str")
                     if (hour == MainActivity.hour
                             && min == MainActivity.min
-                            && sec == MainActivity.sec
+                            && sec >= MainActivity.sec
                             && !mFlag) {
                         mFlag = true
                         Log.e(TAG, "=========finish==========")

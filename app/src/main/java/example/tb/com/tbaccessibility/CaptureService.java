@@ -19,7 +19,7 @@ public class CaptureService extends AccessibilityService {
     private OverFloatView floatView;
     private String packageName;
     private static final String TAG = "CaptureService";
-    private boolean flag=false;
+    private boolean flag = false;
     
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -43,9 +43,9 @@ public class CaptureService extends AccessibilityService {
                     Log.e(TAG, "flag:=== " + flag + "###list.size===" + list.size());
                     if (hour == MainActivity.hour
                             && min == MainActivity.min
-                            && sec == MainActivity.sec
+                            && sec >= MainActivity.sec
                             && !flag) {
-                        flag=true;
+                        flag = true;
                         Log.e(TAG, "=========点击我了，停止服务==========");
                         info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                         MainActivityKt.closeSys();
