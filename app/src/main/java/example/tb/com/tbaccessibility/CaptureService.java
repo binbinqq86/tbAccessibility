@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -95,18 +97,18 @@ public class CaptureService extends AccessibilityService {
     
     public void onCreate() {
         super.onCreate();
-//        floatView = new OverFloatView(this, new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                //toast在小米系统显示不了（需要自己重写toast控件），其他系统OK
-//                //参考：http://blog.csdn.net/u012846783/article/details/50204687
-//                Toast.makeText(CaptureService.this, "hello world", Toast.LENGTH_SHORT).show();
-//                Log.e(TAG,"=========点击我了==========");
-//                startActivity(new Intent(CaptureService.this, DialogActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-//            }
-//        });
+        floatView = new OverFloatView(this, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //toast在小米系统显示不了（需要自己重写toast控件），其他系统OK
+                //参考：http://blog.csdn.net/u012846783/article/details/50204687
+                Toast.makeText(CaptureService.this, "hello world", Toast.LENGTH_SHORT).show();
+                Log.e(TAG,"=========点击我了==========");
+                startActivity(new Intent(CaptureService.this, DialogActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
     }
     
     public void onDestroy() {

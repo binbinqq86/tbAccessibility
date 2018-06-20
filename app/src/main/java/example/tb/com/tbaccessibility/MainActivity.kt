@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
     var mFlag: Boolean = false
 
     companion object {
-        const val hour = 21
-        const val min = 3
-        const val sec = 26
+        const val hour = 20
+        const val min = 10
+        const val sec = 36
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
