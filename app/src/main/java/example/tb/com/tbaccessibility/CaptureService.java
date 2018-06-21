@@ -58,10 +58,10 @@ public class CaptureService extends AccessibilityService {
                         info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                         try {
                             FileOutputStream outputStream=new FileOutputStream(new File(Environment.getExternalStorageDirectory(),"tb123.txt"));
-                            outputStream.write(str.getBytes());
+                            outputStream.write(new SimpleDateFormat("HH:mm:ss").format(new Date(time)).getBytes());
                             outputStream.flush();
                             outputStream.close();
-                            Log.e(TAG, "\n=========文件保存成功==========");
+                            Log.e(TAG, "=========文件保存成功==========");
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
