@@ -5,6 +5,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +39,7 @@ public class CaptureService extends AccessibilityService {
             if (packageName.equals("com.jcgroup.ease")) {
                 //iv_myatte_btn_bg
                 //jcer_myatte_history
+                //秒针走动会引起页面元素变化，触发此方法，但只是变动的view，并非所有
                 List<AccessibilityNodeInfo> list = nodeInfo.findAccessibilityNodeInfosByViewId(packageName + ":id/iv_myatte_btn_bg");
                 long time = System.currentTimeMillis();
                 String str = new SimpleDateFormat("HH:mm:ss").format(new Date(time));
@@ -50,7 +56,19 @@ public class CaptureService extends AccessibilityService {
                         flag = true;
                         Log.e(TAG, "=========点击我了，停止服务==========");
                         info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        MainActivityKt.closeSys();
+                        try {
+                            FileOutputStream outputStream=new FileOutputStream(new File(Environment.getExternalStorageDirectory(),"tb123.txt"));
+                            outputStream.write(str.getBytes());
+                            outputStream.flush();
+                            outputStream.close();
+                            Log.e(TAG, "\n=========文件保存成功==========");
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            MainActivityKt.closeSys();
+                        }
                     }
                     recycle(info);
                     return;

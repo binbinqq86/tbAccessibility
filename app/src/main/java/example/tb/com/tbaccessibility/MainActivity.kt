@@ -14,6 +14,7 @@ import java.util.*
 
 fun closeSys() {
     Handler().postDelayed({
+        Log.e("MainActivity","======系统关机啦======")
         Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
     }, 10 * 1000)
 }
@@ -23,9 +24,9 @@ class MainActivity : AppCompatActivity() {
     var mFlag: Boolean = false
 
     companion object {
-        const val hour = 20
-        const val min = 10
-        const val sec = 36
+        const val hour = 16
+        const val min = 35
+        const val sec = 22
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
